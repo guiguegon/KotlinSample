@@ -1,4 +1,4 @@
-package es.guiguegon.kotlinsample
+package es.guiguegon.kotlinsample.extensions
 
 import android.view.LayoutInflater
 import android.view.View

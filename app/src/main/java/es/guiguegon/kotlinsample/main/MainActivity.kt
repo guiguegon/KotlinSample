@@ -1,4 +1,4 @@
-package es.guiguegon.kotlinsample
+package es.guiguegon.kotlinsample.main
 
 import android.os.Bundle
 import android.support.design.widget.FloatingActionButton
@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.Toolbar
 import android.view.Menu
 import android.view.MenuItem
+import es.guiguegon.kotlinsample.R
 
 class MainActivity : AppCompatActivity() {
 
