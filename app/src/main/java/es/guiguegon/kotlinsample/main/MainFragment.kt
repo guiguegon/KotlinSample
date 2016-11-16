@@ -3,12 +3,13 @@ package es.guiguegon.kotlinsample.main
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import es.guiguegon.kotlinsample.R
+import es.guiguegon.kotlinsample.adapters.NewsAdapter
 import es.guiguegon.kotlinsample.extensions.inflate
+import es.guiguegon.kotlinsample.models.RedditNewsItem
 import kotlinx.android.synthetic.main.fragment_main.*
 
 /**
@@ -31,19 +32,40 @@ class MainFragment() : Fragment() {
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpUi()
+        if (savedInstanceState == null) {
+            fillAdapter()
+        }
+    }
+
+    private fun fillAdapter() {
+        val news = (1..10).map {
+            RedditNewsItem(
+                    "author$it",
+                    "Title $it",
+                    it, // number of comments
+                    1457207701L - it * 200, // time
+                    "http://lorempixel.com/200/200/technics/$it", // image url
+                    "url"
+            )
+        }
+        (news_list.adapter as NewsAdapter).addNews(news)
     }
 
     private fun setUpUi() {
-//        val newsList = view?.findViewById(R.id.news_list) as RecyclerView?
-//        newsList?.setHasFixedSize(true)
-//        newsList?.layoutManager = LinearLayoutManager(context)
-
-
-    }
-
-    private val newsList: RecyclerView by lazy {
         news_list.setHasFixedSize(true)
         news_list.layoutManager = LinearLayoutManager(context)
-        news_list
+        initAdapter()
     }
+
+    private fun initAdapter() {
+        if (news_list.adapter == null) {
+            news_list.adapter = NewsAdapter()
+        }
+    }
+
+//    private val newsList: RecyclerView by lazy {
+//        news_list.setHasFixedSize(true)
+//        news_list.layoutManager = LinearLayoutManager(context)
+//        news_list
+//    }
 }
